@@ -1,51 +1,47 @@
 # 🗡️ EZIO
 
-**EZIO** is a **menu-driven, AI-assisted web reconnaissance and analysis tool** built for **bug bounty hunters, penetration testers, and security learners**.
+**EZIO** is a **menu-driven, AI-assisted web reconnaissance and analysis CLI tool** built for **bug bounty hunters, penetration testers, and security learners**.
 
-It focuses on **signal over noise** by helping you discover **high-value attack surfaces** and understand **what to test next**, instead of blindly running scanners.
+It focuses on **signal over noise** by combining **automated recon**, **attack-chain building**, and **AI-driven reasoning**, while keeping everything **human-readable directly in the terminal**.
 
 ---
 
-## ✨ Features
+## ✨ Key Features
 
-- ✅ Menu-based interactive CLI (easy to use)
+- ✅ Interactive **menu-driven CLI**
+- ✅ **Orange ASCII banner** with colorful terminal UI
 - ✅ Runs as a native command: `ezio`
 - ✅ Header & security misconfiguration checks
-- ✅ JavaScript endpoint extraction (scope enforced)
+- ✅ JavaScript endpoint extraction (scope-aware)
 - ✅ Parameter mining
-- ✅ Auth vs unauth behavior testing
+- ✅ Auth vs unauth response comparison
 - ✅ Attack chain generation
 - ✅ AI-powered vulnerability reasoning (Gemini)
-- ✅ Manual AI analysis for single endpoints
-- ✅ Automatic JSON & Markdown reports
-- ✅ Lightweight (minimal dependencies)
+- ✅ Manual AI analysis mode
+- ✅ **CLI report output** (no need to open files)
+- ✅ JSON & Markdown reports for documentation
+- ✅ SSL-safe requests (handles broken certificates)
+- ✅ No heavy dependencies (no colorama)
 
 ---
 
 ## 🚀 Installation
 
-1️⃣ Clone the repository
-
+### 1️⃣ Clone the repository
 ```bash
-
 git clone https://github.com/Samuel-002/ezio.git
 cd ezio
 
-2️⃣ Install dependencies
-pip install -r requirements.txt
+🐍 Virtual Environment (Recommended)
 
+Using a virtual environment helps avoid dependency conflicts.
 
-## 🐍 Virtual Environment (Recommended)
+Create venv
+python3 -m venv venv
 
-Using a virtual environment is **strongly recommended** to avoid dependency conflicts.
+Activate venv
 
-### Create virtual environment
-```bash
-python -m venv venv
-
-Activate it
-
-Linux / macOS / WSL
+Linux / macOS / Kali
 
 source venv/bin/activate
 
@@ -55,7 +51,6 @@ Windows (PowerShell)
 venv\Scripts\Activate
 
 Install dependencies
-
 pip install -r requirements.txt
 
 
@@ -64,52 +59,46 @@ To deactivate:
 deactivate
 
 
+🔐 AI Setup (Required for AI Features)
 
-3️⃣ Set Gemini API key
+EZIO uses Google Gemini for vulnerability reasoning.
 
+Linux / macOS / Kali
 export GEMINI_API_KEY="your_api_key_here"
 
-
 Windows (PowerShell)
-
 setx GEMINI_API_KEY "your_api_key_here"
 
 
-Restart the terminal after setting the key.
+Restart your terminal after setting the key.
 
-🧰 Run EZIO as a Command
+🧰 Running EZIO
+Local (development)
+python3 ezio.py
 
-Linux / macOS / WSL
-mv ezio.py ezio
+System-wide (Linux / Kali)
 chmod +x ezio
 sudo mv ezio /usr/local/bin/
 
 
-Now you can run EZIO from anywhere:
+Then run from anywhere:
 
 ezio
-
-🖥️ Usage
-Start EZIO
-ezio
-
-
-You will be prompted to:
-
-Enter a target URL
-
-Choose recon/analysis options from the menu
 
 📋 Options Menu
 [1] Header & Security Scan
-[2] JavaScript Endpoint Extraction (domain-only)
+[2] JavaScript Endpoint Extraction
 [3] Parameter Mining
 [4] Auth Context Test
 [5] Build Attack Chains
-[6] AI Vulnerability Reasoning (from recon)
+[6] AI Vulnerability Reasoning
+
 [7] Full Recon (1–6)
-[8] Manual AI Analysis (single endpoint)
+[8] Manual AI Analysis
 [0] Exit
+
+
+Menu and status output are bold and color-coded for clarity.
 
 🔍 Example Workflow
 $ ezio
@@ -122,57 +111,82 @@ EZIO will:
 
 Perform full reconnaissance
 
-Extract endpoints and parameters
-
 Build attack chains
 
 Analyze findings with AI
 
-Save results automatically
+Print a full report in the CLI
+
+Save JSON & Markdown reports
 
 
-🤖 AI Analysis (How It Works)
+📊 CLI Report Output
 
-You enter the target URL once
+After execution, EZIO prints a structured report directly in the terminal:
 
-EZIO performs recon automatically
+Headers & missing security controls
 
-Discovered endpoints and chains are sent to AI
+Discovered endpoints
+
+Parameters
+
+Attack chains
+
+AI reasoning & manual test suggestions
+
+No need to open files unless you want to.
 
 
-AI explains:
+📁 Output Files
 
-Likely vulnerability classes
+EZIO automatically generates:
 
-Why the endpoint is risky
+📄 ezio_output.json — structured, machine-readable
 
-What to test manually
+📄 ezio_report.md — human-readable report
 
-Manual AI Mode
-Select option: 8
-Enter endpoint / URL for manual AI analysis:
-/api/v1/user/profile?id=FUZZ
+Useful for:
+
+Bug bounty submissions
+
+Notes & documentation
+
+Automation workflows
 
 
 🔐 Scope & Safety
 
 Domain-only JavaScript analysis
 
-No brute forcing
+No brute-force attacks
 
 No payload exploitation
 
-Analysis-focused and bug bounty safe
+Designed for authorized testing only
 
-Intended only for authorized testing
+SSL errors are handled gracefully (no crashes)
 
+
+🧠 Philosophy
+
+EZIO is built around:
+
+Logic flaws over payload spam
+
+Human-style attack thinking
+
+AI-assisted decision support
+
+Clean, explainable output
+
+It does not replace skill — it amplifies it.
 
 
 📌 Requirements
 
 Python 3.9+
 
-Internet access (for AI analysis)
+Internet connection (for AI)
 
 Valid Gemini API key
 
@@ -181,35 +195,38 @@ Valid Gemini API key
 
 EZIO is intended only for educational purposes and authorized security testing.
 
-The author is not responsible for misuse of this tool.
+The author is not responsible for misuse.
 
 Always follow legal guidelines and program scope.
 
+
 🛠️ Roadmap
 
-Preset modes (ezio recon, ezio ai)
+--no-color / --no-banner
 
-Session save/load
+Animated intro
 
-Non-interactive mode
+Severity scoring
+
+HTML report export
 
 pip installation
 
-Man page (man ezio)
-
 Plugin system
+
 
 🤝 Contributing
 
-Contributions, ideas, and improvements are welcome.
+Contributions are welcome.
 
-Please keep contributions:
+Please keep all contributions:
 
 Ethical
 
 Documented
 
-In-scope
+In scope
+
 
 ⭐ Final Note
 
@@ -223,4 +240,4 @@ Research
 
 Portfolio projects
 
-Give the repo a ⭐ and build responsibly 🗡️
+Give the repo a ⭐ and hack responsibly 🗡️
