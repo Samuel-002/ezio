@@ -34,9 +34,38 @@ cd ezio
 2️⃣ Install dependencies
 pip install -r requirements.txt
 
-3️⃣ Set Gemini API key
+
+## 🐍 Virtual Environment (Recommended)
+
+Using a virtual environment is **strongly recommended** to avoid dependency conflicts.
+
+### Create virtual environment
+```bash
+python -m venv venv
+
+Activate it
 
 Linux / macOS / WSL
+
+source venv/bin/activate
+
+
+Windows (PowerShell)
+
+venv\Scripts\Activate
+
+Install dependencies
+
+pip install -r requirements.txt
+
+
+To deactivate:
+
+deactivate
+
+
+
+3️⃣ Set Gemini API key
 
 export GEMINI_API_KEY="your_api_key_here"
 
