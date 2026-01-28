@@ -1,4 +1,4 @@
 from urllib.parse import urlparse
 
-def in_scope(base_domain, url):
-    return urlparse(url).netloc.endswith(base_domain)
+def in_scope(domain, url):
+    return urlparse(url).netloc.endswith(domain)

@@ -1,3 +1,5 @@
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 import re, requests
 from urllib.parse import urljoin
 from core.scope import in_scope
@@ -5,17 +7,21 @@ from core.scope import in_scope
 JS_REGEX = r'src=["\'](.*?\.js)["\']'
 EP_REGEX = r'["\'](\/api\/[^"\']+|\/[^"\']+)["\']'
 
-def extract_js(url, base_domain):
-    html = requests.get(url, timeout=10).text
-    js_files = re.findall(JS_REGEX, html)
+def extract_js(url, domain):
+    try:
+        html = requests.get(url, timeout=10, verify=False).text
+    except Exception:
+        return []
+
     endpoints = set()
-
-    for js in js_files:
+    for js in re.findall(JS_REGEX, html):
         js_url = urljoin(url, js)
-        if not in_scope(base_domain, js_url):
+        if not in_scope(domain, js_url):
             continue
-
-        code = requests.get(js_url, timeout=10).text
-        endpoints.update(re.findall(EP_REGEX, code))
+        try:
+            code = requests.get(js_url, timeout=10, verify=False).text
+            endpoints.update(re.findall(EP_REGEX, code))
+        except Exception:
+            pass
 
     return list(endpoints)

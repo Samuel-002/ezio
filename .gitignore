@@ -1,0 +1,6 @@
+venv/
+__pycache__/
+*.pyc
+.env
+ezio_output.json
+ezio_report.md
